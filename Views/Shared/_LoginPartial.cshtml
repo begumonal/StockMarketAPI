@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var loggedInUser = await UserManager.GetUserAsync(User);
+
+        var isAdmin = User.IsInRole("Admin") && User.IsInRole("User");
+
+        @if (loggedInUser != null)
+        {
+            var rolesThatUserHas = await UserManager.GetRolesAsync(loggedInUser);
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>Hello</b> @loggedInUser.FullName</a>
+            </li>
+            @if (isAdmin)
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>Role</b> @rolesThatUserHas.Last()</a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>Role: </b> @rolesThatUserHas.FirstOrDefault()</a>
+                </li>
+            }
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>Gender: </b> @loggedInUser.Gender</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>Birthday: </b> @loggedInUser.BirthDate</a>
+            </li>
+
+            <li class="nav-item">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link text-dark"><b>Logout</b></button>
+                </form>
+            </li>
+
+            @if (isAdmin)
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-controller="User" asp-action="Index">Manage Users</a>
+                </li>
+            }
+            }
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </li>
+        }
+</ul>

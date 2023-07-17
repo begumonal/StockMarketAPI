@@ -1,0 +1,1 @@
+C:\Users\begum\source\repos\StockMarket_Begum\StockMarket_begum\obj\Release\net6.0\StockMarket_begum.csproj.AssemblyReference.cache
