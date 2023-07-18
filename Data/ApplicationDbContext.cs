@@ -22,14 +22,14 @@ namespace StockMarket_begum.Data
             builder.Entity<IdentityRole>().HasData(
                 new IdentityRole
                 {
-                    Id = "User",
+                    Id = "1",
                     Name = "User",
                     NormalizedName = "USER",
                     ConcurrencyStamp = null
                 },
                 new IdentityRole
                 {
-                    Id = "Admin",
+                    Id = "2",
                     Name = "Admin",
                     NormalizedName = "ADMIN",
                     ConcurrencyStamp = null
@@ -73,14 +73,9 @@ namespace StockMarket_begum.Data
                     UserId = adminUserId
                 }
             );
-           
+
         }
-        
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(@"Data Source =(localdb)\\mssqllocaldb;Database=aspnet-StockMarket_begum-799698b5-cca8-4ec8-81f8-697fbaf07247;Trusted_Connection=True;MultipleActiveResultSets=true");
-        //}
-        
+
     }
 }
 

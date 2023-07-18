@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using StockMarket_begum.Data;
 
 
 namespace StockMarket_begum.Models;
@@ -26,6 +27,5 @@ namespace StockMarket_begum.Models;
  
     public class CustomRole : IdentityRole
     {
-        
     }
    

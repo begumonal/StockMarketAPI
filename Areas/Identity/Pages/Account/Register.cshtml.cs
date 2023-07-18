@@ -142,17 +142,9 @@ namespace StockMarket_begum.Areas.Identity.Pages.Account
                     _logger.LogInformation("couldnt create user");
                 }
                 else
-                {
-                        if (_userManager.Users.Count() <= 1)
-                        {
-                            await _userManager.AddToRoleAsync(user, Input.Role = "Admin");
-                            await _userManager.AddToRoleAsync(user, Input.Role = "User");
-
-                         }
-                    else
-                        {
-                            await _userManager.AddToRoleAsync(user, Input.Role = "User");
-                         }
+                { 
+                    await _userManager.AddToRoleAsync(user, Input.Role = "User");
+                         
 
                     _logger.LogInformation("User created a new account with password.");
 

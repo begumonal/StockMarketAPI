@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5+YiDRWwgooO75jy7oAdQr8sjQGQX0XeKxVuW1Pob/G7CV6V2zBKS+pk4EgL6yxTGZXjSH+vRUvrB2WcX2h6FQ==",
+  "dgSpecHash": "LXVKaX0i8v72hOgG8uaF6bCrMXBx20c4D/6LX5CHpI4Zcs9ilaP4KZNFTQ9ODBKKxN8eZbmwRCGIoQORoYXqAw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\begum\\source\\repos\\StockMarket_Begum\\StockMarket_begum\\StockMarket_begum.csproj",
+  "projectFilePath": "C:\\Users\\begum\\begumtest\\StockMarketAPI\\StockMarket_begum.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\begum\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\begum\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

@@ -11786,11 +11786,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\begum\\source\\repos\\StockMarket_begum\\StockMarket_begum\\StockMarket_begum.csproj",
+      "projectUniqueName": "C:\\Users\\begum\\begumtest\\StockMarketAPI\\StockMarket_begum.csproj",
       "projectName": "StockMarket_begum",
-      "projectPath": "C:\\Users\\begum\\source\\repos\\StockMarket_begum\\StockMarket_begum\\StockMarket_begum.csproj",
+      "projectPath": "C:\\Users\\begum\\begumtest\\StockMarketAPI\\StockMarket_begum.csproj",
       "packagesPath": "C:\\Users\\begum\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\begum\\source\\repos\\StockMarket_begum\\StockMarket_begum\\obj\\",
+      "outputPath": "C:\\Users\\begum\\begumtest\\StockMarketAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\begum\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -11883,6 +11883,14 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
