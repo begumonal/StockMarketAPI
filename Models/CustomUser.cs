@@ -23,9 +23,14 @@ namespace StockMarket_begum.Models;
         [Display(Name = "Birthday")]
         [DataType(DataType.DateTime)]
         public DateTime BirthDate { get; set; }
+
+
+    public List<Transaction> Transactions { get; set; } = new();
+        public Portfolio Portfolio { get; set; }
+
     }
- 
-    public class CustomRole : IdentityRole
+
+public class CustomRole : IdentityRole
     {
     }
    

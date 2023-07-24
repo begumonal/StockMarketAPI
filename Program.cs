@@ -76,6 +76,11 @@ namespace StockMarket_begum
                 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
                 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
                 builder.Services.AddScoped<IUserRepository, UserRepository>();
+                builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+                builder.Services.AddScoped<IStockRepository, StockRepository>();
+                builder.Services.AddScoped<IStockBehaviourRepository, StockBehaviourRepository>();
+                builder.Services.AddScoped<ITransactionRepository,TransactionRepository>();
+
             }
         }
     }
