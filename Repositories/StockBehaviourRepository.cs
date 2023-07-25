@@ -22,7 +22,7 @@ namespace StockMarket_begum.Repositories
 
         public async Task DeleteStockBehaviourAsync(string id)
         {
-            var stock = await _context.StockBehaviours.FindAsync(id);
+            var stock = await _context.StockBehaviours.FirstOrDefaultAsync(s => s.StockBehaviourId == id);
             if (stock != null)
             {
                 _context.StockBehaviours.Remove(stock);
@@ -37,7 +37,7 @@ namespace StockMarket_begum.Repositories
 
         public async Task<StockBehaviour> GetStockBehaviourByIdAsync(string id)
         {
-            return await _context.StockBehaviours.FindAsync(id);
+            return await _context.StockBehaviours.FirstOrDefaultAsync(s => s.StockBehaviourId == id);
         }
 
         public async Task UpdateStockBehaviourAsync(string id, StockBehaviour stockBehaviour)

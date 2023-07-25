@@ -30,13 +30,12 @@ namespace StockMarket_begum.Controllers
                 // Add the new portfolio to the database
                 // Assuming the repository has an Add method
                 await _unitOfWork.StockBehaviourRepository.AddStockBehaviourAsync(stockBehaviour);
-                return RedirectToAction("Index");
             }
 
-            return View(stockBehaviour);
+            return Ok(stockBehaviour);
         }
 
-        [HttpPut("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> UpdateStockBehaviours(string id, StockBehaviour updatedStockBehaviour)
         {
             if (id != updatedStockBehaviour.StockBehaviourId)
@@ -50,11 +49,10 @@ namespace StockMarket_begum.Controllers
                 // Assuming the repository has an Update method
                 await _unitOfWork.StockBehaviourRepository.UpdateStockBehaviourAsync(id, updatedStockBehaviour);
 
-                return RedirectToAction("Index");
             }
 
             // If the model is not valid, return the view with errors
-            return View(updatedStockBehaviour);
+            return Ok(updatedStockBehaviour);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -66,7 +64,7 @@ namespace StockMarket_begum.Controllers
                 return BadRequest();
             }
             await _unitOfWork.StockBehaviourRepository.DeleteStockBehaviourAsync(id);
-            return View(stockBehaviour);
+            return Ok(stockBehaviour);
         }
     }
 }

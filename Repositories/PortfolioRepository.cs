@@ -23,7 +23,7 @@ namespace StockMarket_begum.Repositories
 
         public async Task DeletePortfolioAsync(string id)
         {
-            var portfolio = await _context.Portfolios.FindAsync(id);
+            var portfolio = await _context.Portfolios.FirstOrDefaultAsync(p => p.PortfolioId == id);
             if (portfolio != null)
             {
                 _context.Portfolios.Remove(portfolio);
@@ -38,7 +38,7 @@ namespace StockMarket_begum.Repositories
 
         public async Task<Portfolio> GetPortfolioByIdAsync(string id)
         {
-            return await _context.Portfolios.FindAsync(id);
+            return await _context.Portfolios.FirstOrDefaultAsync(p => p.PortfolioId == id);
 
         }
 

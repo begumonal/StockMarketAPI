@@ -1,16 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StockMarket_begum.Coe.Repository;
 using StockMarket_begum.Models;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace StockMarket_begum.Controllers
 {
     public class StockController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly string _apiKey = "ZAJSDPDINFV3Y91Z";
 
-        public StockController(IUnitOfWork unitOfWork)
+        public StockController(IUnitOfWork unitOfWork, IHttpClientFactory httpClientFactory)
         {
             _unitOfWork = unitOfWork;
+            _httpClientFactory = httpClientFactory;
         }
 
         [HttpGet]
@@ -23,21 +31,20 @@ namespace StockMarket_begum.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<Stock>>> AddStock(Stock stock)
+        public async Task<ActionResult<IEnumerable<Stock>>> AddStocks(Stock stock)
         {
             if (ModelState.IsValid)
             {
                 // Add the new portfolio to the database
                 // Assuming the repository has an AddPortfolioAsync method
                 await _unitOfWork.StockRepository.AddStockAsync(stock);
-                return RedirectToAction("Index");
             }
 
-            return View(stock);
+            return Ok(stock);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateStockPortfolios(string id, Stock updatedStock)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> UpdateStocks(string id, Stock updatedStock)
         {
             if (id != updatedStock.StockId)
             {
@@ -50,15 +57,14 @@ namespace StockMarket_begum.Controllers
                 // Assuming the repository has an UpdatePortfolioAsync method
                 await _unitOfWork.StockRepository.UpdateStockAsync(id, updatedStock);
 
-                return RedirectToAction("Index");
             }
 
             // If the model is not valid, return the view with errors
-            return View(updatedStock);
+            return Ok(updatedStock);
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteStockPortfolios(string id)
+        public async Task<IActionResult> DeleteStocks(string id)
         {
             var stock = await _unitOfWork.StockRepository.GetStockByIdAsync(id);
             if (stock == null)
@@ -66,9 +72,48 @@ namespace StockMarket_begum.Controllers
                 return BadRequest();
             }
             await _unitOfWork.StockRepository.DeleteStockAsync(id);
-            return View(stock);
+            return Ok(stock);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAlphaVantageData(string symbol)
+        {
+            using (var httpClient = _httpClientFactory.CreateClient())
+            {
+                var url =
+                    $"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={_apiKey}";
 
+                var response = await httpClient.GetAsync(url);  
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonString = await response.Content.ReadAsStringAsync();
+                    var stockData = JsonConvert.DeserializeObject<AlphaVantageStockData>(jsonString);
+                    return Ok(stockData);
+                }
+            }
+
+            return BadRequest();
+
+        }
+    }
+
+    public class AlphaVantageStockData
+    {
+        public Dictionary<DateTime, AlphaVantageStockQuote> TimeSeriesDaily { get; set; }
+    }
+
+    public class AlphaVantageStockQuote
+    {
+        [JsonProperty("1. open")]
+        public decimal Open { get; set; }
+
+        [JsonProperty("2. high")]
+        public decimal High { get; set; }
+
+        [JsonProperty("3. low")]
+        public decimal Low { get; set; }
+
+        [JsonProperty("4. close")]
+        public decimal Close { get; set; }
     }
 }

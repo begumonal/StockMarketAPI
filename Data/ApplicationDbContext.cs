@@ -73,12 +73,7 @@ namespace StockMarket_begum.Data
                 .HasForeignKey(sb => sb.PortfolioId)
                 .OnDelete(DeleteBehavior.Restrict); // Set the OnDelete behavior to Restrict
 
-
-
-
-
-
-
+               
 
             builder.Entity<IdentityRole>().HasData(
                 new IdentityRole

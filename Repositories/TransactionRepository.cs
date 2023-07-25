@@ -22,7 +22,7 @@ namespace StockMarket_begum.Repositories
 
         public async Task DeleteTransactionAsync(string id)
         {
-            var transaction = await _context.Transactions.FindAsync(id);
+            var transaction = await _context.Transactions.FirstOrDefaultAsync(t => t.TransactionId == id);
             if (transaction != null)
             {
                 _context.Transactions.Remove(transaction);
@@ -37,7 +37,7 @@ namespace StockMarket_begum.Repositories
 
         public async Task<Transaction> GetTransactionByIdAsync(string id)
         {
-            return await _context.Transactions.FindAsync(id);
+            return await _context.Transactions.FirstOrDefaultAsync(t => t.TransactionId == id);
         }
 
         public async Task UpdateTransactionAsync(string id, Transaction transaction)
